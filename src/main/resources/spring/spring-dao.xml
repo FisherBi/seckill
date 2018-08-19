@@ -13,7 +13,7 @@
         <!--配置连接池属性-->
         <property name="driverClass" value="${driver}"/>
         <property name="jdbcUrl" value="${url}"/>
-        <property name="user" value="${username}"/>
+        <property name="user" value="${user}"/>
         <property name="password" value="${password}"/>
 
         <!--2.c3p0连接池的私有属性-->

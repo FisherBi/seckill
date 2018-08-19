@@ -10,8 +10,8 @@
           seckill
         SET
           number = number - 1
-        where seckill_id = #{seckillId}
-        and start_time <![CDATA[ <= ]]> #{killTime},
+        where seckill_id = #{secKillId}
+        and start_time <![CDATA[<=]]> #{killTime}
         and end_time >= #{killTime}
         and number > 0;
     </update>
