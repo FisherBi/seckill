@@ -5,8 +5,8 @@
 <mapper namespace="org.seckill.dao.SuccessKilledDao">
     <insert id="insertSuccessKilled">
         <!-- 主键冲突，不报错 -->
-        insert ignore into success_killed(seckill_id, usser_phone)
-        VALUES (#{secKillId}, #{userPhone})
+        insert ignore into success_killed(seckill_id, usser_phone, state)
+        VALUES (#{secKillId}, #{userPhone}, 0)
     </insert>
     <select id="queryByIdWithSecKill" resultType="SuccessKilled">
         <!-- 如何告诉MyBatis把结果映射到SuccessKilled同时映射SecKill属性 -->
@@ -23,6 +23,6 @@
           s.create_time "seckill.create_time"
          from success_killed sk
          inner join seckill s on sk.seckill_id = s.seckill_id
-         where sk.seckill_id = #{seseckill.cKillId}
+         where sk.seckill_id = #{secKillId} and sk.usser_phone = #{userPhone}
     </select>
 </mapper>
