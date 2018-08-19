@@ -19,6 +19,6 @@ public interface SuccessKilledDao {
      * 根据id查询SuccessKilled并携带SecKill对象实体
      * @return
      */
-    SuccessKilled queryByIdWithSecKill();
+    SuccessKilled queryByIdWithSecKill(long SecKillId);
 
 }
