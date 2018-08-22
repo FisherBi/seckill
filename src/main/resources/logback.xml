@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true">
+    <property name="consoleLayoutPattern"
+              value="%-20(%d{yyyyMMdd_HH:mm:ss.SSS} [%logger][%thread] [%-4relative])
+                [%X{hostName} %X{requestId} %X{processId} %X{service.timing} ][%level] %msg%n" />
+    <!-- 控制台输出 -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <layout name="StandardFormat" class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${consoleLayoutPattern}</pattern>
+        </layout>
+    </appender>
+
+    <root level="debug">
+        <appender-ref ref="CONSOLE"/>
+    </root>
+</configuration>

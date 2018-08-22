@@ -12,7 +12,7 @@
         <!-- 如何告诉MyBatis把结果映射到SuccessKilled同时映射SecKill属性 -->
         select
           sk.seckill_id,
-          sk.usser_phone,
+          sk.usser_phone as userphone,
           sk.create_time,
           sk.state,
           s.seckill_id "seckill.seckill_id",
