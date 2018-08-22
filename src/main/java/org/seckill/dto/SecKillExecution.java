@@ -20,6 +20,16 @@ public class SecKillExecution {
     //秒杀成功对象
     private SuccessKilled successKilled;
 
+    @Override
+    public String toString() {
+        return "SecKillExecution{" +
+                "secKillId=" + secKillId +
+                ", state=" + state +
+                ", stateInfo='" + stateInfo + '\'' +
+                ", successKilled=" + successKilled +
+                '}';
+    }
+
     public long getSecKillId() {
         return secKillId;
     }
