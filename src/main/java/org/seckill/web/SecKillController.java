@@ -97,6 +97,7 @@ public class SecKillController {
     }
 
     @RequestMapping(value = "/time/now", method = RequestMethod.GET)
+    @ResponseBody
     public SecKillResult<Long> time(){
         Date now = new Date();
         return new SecKillResult<>(true, now.getTime());

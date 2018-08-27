@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: FisherBi
-  Date: 2018/8/26
-  Time: 17:27
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
@@ -30,7 +23,7 @@
         </div>
     </div>
 <!-- 登錄彈出層，输入电话 -->
-<div id="killPhoneModel" class="modal fade">
+<div id="killPhoneModal" class="modal fade">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -68,7 +61,7 @@
 <%--jQuery cookie操作插件--%>
 <script src="https://cdn.bootcss.com/jquery-cookie/1.4.1/jquery.cookie.min.js"></script>
 <%--jQuery countDown倒计时插件--%>
-<script src="https://cdn.bootcss.com/jquery-countdown/2.0.1/jquery.countdown.js"></script>
+<script src="https://cdn.bootcss.com/jquery.countdown/2.2.0/jquery.countdown.min.js"></script>
 
 <script src="/resource/script/seckill.js" type="text/javascript"></script>
 <script type="text/javascript">
@@ -76,8 +69,8 @@
         //使用EL表达式传入参数
         seckill.detail.init({
             seckillId : ${seckill.secKillId},
-            startTime : ${seckill.startTime},//毫秒
-            endTime : ${seckill.endTime}
+            startTime : ${seckill.startTime.time},//毫秒
+            endTime : ${seckill.endTime.time}
         });
     });
 </script>
