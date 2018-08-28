@@ -57,7 +57,7 @@ public class SecKillController {
             method = RequestMethod.POST,
             produces = {"application/json;charset=UTF-8"})
     @ResponseBody
-    public SecKillResult<Exposer> exposer(Long seckillId) {
+    public SecKillResult<Exposer> exposer(@PathVariable("seckillId") Long seckillId) {
         SecKillResult<Exposer> result;
         try {
             Exposer exposer = secKillService.exportSecKillUrl(seckillId);
@@ -85,18 +85,19 @@ public class SecKillController {
             return new SecKillResult<SecKillExecution>(true, execution);
         } catch (RepeatKillException e) {
             SecKillExecution execution = new SecKillExecution(secKillId, SeckillStateEnum.REPEAT_KILL);
-            return new SecKillResult<SecKillExecution>(false, execution);
+            return new SecKillResult<SecKillExecution>(true, execution);
         } catch (SecKillCloseException e) {
             SecKillExecution execution = new SecKillExecution(secKillId, SeckillStateEnum.END);
-            return new SecKillResult<SecKillExecution>(false, execution);
+            return new SecKillResult<SecKillExecution>(true, execution);
         } catch (Exception e) {
             logger.error(e.getMessage(), e);
             SecKillExecution execution = new SecKillExecution(secKillId, SeckillStateEnum.INNER_ERROR);
-            return new SecKillResult<SecKillExecution>(false, execution);
+            return new SecKillResult<SecKillExecution>(true, execution);
         }
     }
 
     @RequestMapping(value = "/time/now", method = RequestMethod.GET)
+    @ResponseBody
     public SecKillResult<Long> time(){
         Date now = new Date();
         return new SecKillResult<>(true, now.getTime());
