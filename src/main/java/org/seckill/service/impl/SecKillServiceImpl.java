@@ -2,6 +2,7 @@ package org.seckill.service.impl;
 
 import org.seckill.dao.SecKillDao;
 import org.seckill.dao.SuccessKilledDao;
+import org.seckill.dao.cache.RedisDao;
 import org.seckill.dto.Exposer;
 import org.seckill.dto.SecKillExecution;
 import org.seckill.entity.SecKill;
@@ -33,6 +34,8 @@ public class SecKillServiceImpl implements SecKillService {
     private SecKillDao secKillDao;
     @Autowired
     private SuccessKilledDao successKilledDao;
+    @Autowired
+    private RedisDao redisDao;
 
     //MD5盐值字符串，用于混淆MD5
     private final String salt = "asdfwqrdasfdsf2342344$#@$@$@$##@$adf3";
@@ -49,9 +52,18 @@ public class SecKillServiceImpl implements SecKillService {
 
     @Override
     public Exposer exportSecKillUrl(long secKillId) {
-        SecKill secKill = secKillDao.queryById(secKillId);
+        //优化点：缓存优化
+        //1: 访问redis
+        SecKill secKill = redisDao.getSecKill(secKillId);
         if (secKill == null) {
-            return new Exposer(false, secKillId);
+            //2: 访问数据库
+            secKill = secKillDao.queryById(secKillId);
+            if (secKill == null) {
+                return new Exposer(false, secKillId);
+            } else {
+                //3: 放入redis
+                redisDao.putSecKill(secKill);
+            }
         }
         Date startTime = secKill.getStartTime();
         Date endTime = secKill.getEndTime();
