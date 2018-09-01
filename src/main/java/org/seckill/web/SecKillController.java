@@ -81,7 +81,8 @@ public class SecKillController {
         }
         SecKillResult<SecKillExecution> result;
         try {
-            SecKillExecution execution = secKillService.executeSecKill(secKillId, phone, md5);
+            //存储过程调用
+            SecKillExecution execution = secKillService.executeSecKillProcedure(secKillId, phone, md5);
             return new SecKillResult<SecKillExecution>(true, execution);
         } catch (RepeatKillException e) {
             SecKillExecution execution = new SecKillExecution(secKillId, SeckillStateEnum.REPEAT_KILL);
