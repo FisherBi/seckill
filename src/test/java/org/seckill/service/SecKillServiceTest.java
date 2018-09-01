@@ -76,4 +76,17 @@ public class SecKillServiceTest {
         }
     }
 
+    @Test
+    public void executeSecKillProcedure(){
+        long secKillId= 1002L;
+        long phone = 1362734321;
+        Exposer exposer = secKillService.exportSecKillUrl(secKillId);
+        if(exposer.isExposed()){
+            String md5 = exposer.getMd5();
+            SecKillExecution secKillExecution = secKillService.executeSecKillProcedure(secKillId, phone, md5);
+            logger.info(secKillExecution.getStateInfo());
+        }
+
+    }
+
 }
